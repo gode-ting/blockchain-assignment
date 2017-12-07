@@ -2,7 +2,7 @@ const express = require('express');
 const cnf = require('cnf');
 
 // Routes
-const indexRoute = require('./routes/index');
+const indexRoute = require('./routes/index.js');
 
 function main() {
 	const app = express();
