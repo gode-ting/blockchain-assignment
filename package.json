@@ -1,0 +1,33 @@
+{
+	"name": "blockchain-assignment",
+	"version": "1.0.0",
+	"description": "Repository for blockchain assignment (subject 12) in our system integration course, PBA software development at cphbusiness",
+	"main": "index.js",
+	"engines": {
+		"node": "8.9.1",
+		"npm": "5.5.1"
+	},
+	"scripts": {
+		"dev": "nodemon .",
+		"start": "node .",
+		"test": "test"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/gode-ting/blockchain-assignment.git"
+	},
+	"keywords": [
+		"blockchain"
+	],
+	"author": "Daniel Hillmann, Emil Gräs, Anders Bjergfeldt, Frederik Larsen",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/gode-ting/blockchain-assignment/issues"
+	},
+	"homepage": "https://github.com/gode-ting/blockchain-assignment#readme",
+	"dependencies": {
+		"cnf": "^3.3.1",
+		"express": "^4.16.2",
+		"nodemon": "^1.12.5"
+	}
+}
