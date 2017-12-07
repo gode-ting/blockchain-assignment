@@ -12,4 +12,4 @@ Any of these commands should be run from a terminal where current working direct
 
 `npm run start`: start a node server. Should be used for production.
 
-`npm run test`: Runs specified mocha tests
+`npm run test`: Runs specified mocha tests (none setup yet)
