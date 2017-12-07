@@ -25,16 +25,17 @@ In general people use ECMAscript to add better syntax to JavaScript projects, an
 An **arrow function** is just like a default javascript function, but with a slightly different syntax. It's mostly used within other functions, and not to declare a function:
 
 ```javascript
-	app.listen(port, () => {
-		console.log(`Listening on port ${port}`);
-	});
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
 ```
 
 **Regular function:**
+
 ```javascript
-	app.listen(port, function () {
-		console.log(`Listening on port ${port}`);
-	});
+app.listen(port, function () {
+  console.log(`Listening on port ${port}`);
+});
 ```
 
 ### var, let and const
@@ -62,7 +63,7 @@ const subModuleRequirement = require('iAmASubModule');
 
 Using require is the way you add modules to a module. This can be used to inject both module-dependencies from NPM registry, but also local modules.
 
-Usually you declare these as a **const** as they most likely are not going to be manipulated/changed. 
+Usually you declare these as a **const** as they most likely are not going to be manipulated/changed.
 
 ```javascript
 // load from dependecies - node_modules folder
