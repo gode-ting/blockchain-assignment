@@ -10,7 +10,7 @@
 	"scripts": {
 		"dev": "nodemon .",
 		"start": "node ./src/httpServer",
-		"test": "test",
+		"test": "mocha",
 		"node-one": "HTTP_PORT=3001 P2P_PORT=6001 npm run dev",
 		"node-two": "HTTP_PORT=3002 P2P_PORT=6002 PEERS=ws://localhost:6001 npm run dev",
 		"node-three": "HTTP_PORT=3003 P2P_PORT=6003 PEERS=ws://localhost:6001,ws://localhost:6002 npm run dev",
@@ -32,8 +32,10 @@
 	"dependencies": {
 		"@debitoor/eslint-config-debitoor": "^2.0.1",
 		"body-parser": "^1.18.2",
+		"chai": "^4.1.2",
 		"eslint": "^4.12.1",
 		"express": "^4.16.2",
+		"mocha": "^4.0.1",
 		"nodemon": "^1.12.5",
 		"sha256": "^0.2.0",
 		"ws": "^3.3.3"
