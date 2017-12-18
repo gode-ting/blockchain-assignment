@@ -20,7 +20,7 @@ const initHttpServer = (port) => {
 		peers.connectToPeers([req.body.peer]);
 		res.send(`Added ${req.body.peer} to peer list`);
 	});
-	app.listen(port, () => console.log('Listening http on port: ' + port));
+	app.listen((port), () => console.log('Listening http on port: ' + port));
 };
 
 module.exports = {
