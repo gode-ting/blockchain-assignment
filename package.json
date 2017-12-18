@@ -10,7 +10,9 @@
 	"scripts": {
 		"dev": "nodemon .",
 		"start": "node .",
-		"test": "test"
+		"test": "test",
+		"node-one": "HTTP_PORT=3001 P2P_PORT=6001 npm run dev",
+		"node-two": "HTTP_PORT=3002 P2P_PORT=6002 PEERS=ws://localhost:6001 npm run dev"
 	},
 	"repository": {
 		"type": "git",
@@ -27,9 +29,11 @@
 	"homepage": "https://github.com/gode-ting/blockchain-assignment#readme",
 	"dependencies": {
 		"@debitoor/eslint-config-debitoor": "^2.0.1",
+		"body-parser": "^1.18.2",
 		"cnf": "^3.3.1",
 		"eslint": "^4.12.1",
 		"express": "^4.16.2",
-		"nodemon": "^1.12.5"
+		"nodemon": "^1.12.5",
+		"ws": "^3.3.3"
 	}
 }
