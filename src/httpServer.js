@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const peers = require('./peers');
+const peerServer = require('./peerServer');
 const Blockchain = require('./Blockhain');
 let sockets = require('./sockets');
 
@@ -9,7 +9,7 @@ const initHttpServer = (port) => {
 	app.use(bodyParser.json());
 
 	app.get('/broadcast', (req, res) => {
-		peers.broadcast('Broadcast test');
+		peerServer.broadcast('Broadcast test');
 		res.send();
 	});
 
@@ -20,6 +20,7 @@ const initHttpServer = (port) => {
 
 		let blockchain = new Blockchain();
 		blockchain.new_transaction(sender, recipient, amount);
+		res.json({status: 'success', transaction: JSON.stringify(blockchain)});
 	});
 
 	app.get('/mine', (req, res) => {
@@ -31,10 +32,10 @@ const initHttpServer = (port) => {
 		res.send(peerListeners);
 	});
 	app.post('/addPeer', (req, res) => {
-		peers.connectToPeers([req.body.peer]);
+		peerServer.connectToPeers([req.body.peer]);
 		res.send(`Added ${req.body.peer} to peer list`);
 	});
-	app.listen((port), () => console.log('Listening http on port: ' + port));
+	app.listen((port), () => console.log(`Listening http on port: + ${port}`));
 };
 
 module.exports = {
