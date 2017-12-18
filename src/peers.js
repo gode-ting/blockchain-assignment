@@ -7,77 +7,63 @@ const MessageType = {
 	RESPONSE_BLOCKCHAIN: 2
 };
 
-const connectToPeers = (newPeers) => {
-	console.log('Connecting new peers: ', newPeers);
-	newPeers.forEach((peer) => {
-		console.log('Peer:', peer);
-		let webSocket = new WebSocket(peer);
-		webSocket.on('open', () => {
-			initConnection(webSocket);
-		});
-		webSocket.on('error', () => {
-			console.log(`Connection for ${peer} failed`);
-		});
-	});
+let initP2PServer = (port) => {
+	let server = new WebSocket.Server({ port: port });
+	server.on('connection', ws => initConnection(ws));
+	console.log('listening websocket p2p port on: ' + port);
+
 };
 
-const initConnection = (webSocket) => {
-	sockets.push(webSocket);
-	initMessageHandler(webSocket);
-	initErrorHandler(webSocket);
-	write(webSocket, 'init connection');
+let initConnection = (ws) => {
+	sockets.push(ws);
+	initMessageHandler(ws);
+	initErrorHandler(ws);
+	write(ws, { 'type': MessageType.QUERY_LATEST });
 };
 
-const initMessageHandler = (webSocket) => {
-	webSocket.on('message', (data) => {
-		const message = JSON.parse(data);
-		// console.log(`Received message ${JSON.stringify(message)}`);
+let initMessageHandler = (ws) => {
+	ws.on('message', (data) => {
+		let message = JSON.parse(data);
+		console.log('Received message' + JSON.stringify(message));
 		switch (message.type) {
-			case MessageType.QUERY_LAST:
-				console.log('Query last');
-				write(webSocket, 'query last');
+			case MessageType.QUERY_LATEST:
+				write(ws, { 'type': MessageType.RESPONSE_BLOCKCHAIN, 'data': 'lala' });
 				break;
 			case MessageType.QUERY_ALL:
-				console.log('Query all');
-				write(webSocket, 'query all');
+				write(ws, { 'type': MessageType.RESPONSE_BLOCKCHAIN, 'data': 'lallala' });
 				break;
 			case MessageType.RESPONSE_BLOCKCHAIN:
-				console.log('blockchain');
-				// handle block chain response;
+				console.log('Response blockchain!');
 				break;
 		}
 	});
 };
 
-const initErrorHandler = (webSocket) => {
-	function closeConnection (webSocket) {
-		console.log(`Connection failed to peer: ${webSocket.url}`);
-		// Remove given websocket from sockets array
-		console.log('Before: ', sockets);
-		sockets.splice(sockets.indexOf(webSocket), 1);
-		console.log('After: ', sockets);
-	}
-	webSocket.on('close', () => closeConnection(webSocket));
-	webSocket.on('error', () => closeConnection(webSocket));
+let initErrorHandler = (ws) => {
+	let closeConnection = (ws) => {
+		console.log(`connection failed to peer: ${ws.url}`);
+		sockets.splice(sockets.indexOf(ws), 1);
+	};
+	ws.on('close', () => closeConnection(ws));
+	ws.on('error', () => closeConnection(ws));
 };
 
-const initP2PServer = (port) => {
-	let server = new WebSocket.Server({
-		port: port
+
+let connectToPeers = (newPeers) => {
+	newPeers.forEach((peer) => {
+		let ws = new WebSocket(peer);
+		ws.on('open', () => initConnection(ws));
+		ws.on('error', () => {
+			console.log(`Connection failed on ${peer}`);
+		});
 	});
-	server.on('connection', (webSocket) => initConnection(webSocket));
-	console.log(`Listening websocket p2p port on : ${port}`);
 };
 
-const write = (webSocket, message) => {
-	console.log('WRITE!');
-	console.log('Message:', message);
-	webSocket.send(JSON.stringify(message));
-};
-const broadcast = (message) => sockets.forEach((socket) => write(socket, message));
+let write = (ws, message) => ws.send(JSON.stringify(message));
+let broadcast = (message) => sockets.forEach(socket => write(socket, message));
 
 module.exports = {
-	connectToPeers,
 	initP2PServer,
-	broadcast
+	broadcast,
+	connectToPeers
 };
