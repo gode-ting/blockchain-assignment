@@ -1,6 +1,6 @@
 const sha256 = require('sha256');
 
-class Blockchain {
+module.exports = class Blockchain {
 	constructor() {
 		this.chain = [{
 			'index': 0,
@@ -52,4 +52,4 @@ class Blockchain {
 		var hashed_guess = sha256(guess);
 		return hashed_guess.substr(hashed_guess.length - 1) === '0';
 	}
-}
+};
