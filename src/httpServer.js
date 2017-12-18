@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const peers = require('./peers');
+const Blockchain = require('./Blockhain');
 let sockets = require('./sockets');
 
 const initHttpServer = (port) => {
@@ -10,6 +11,19 @@ const initHttpServer = (port) => {
 	app.get('/broadcast', (req, res) => {
 		peers.broadcast('Broadcast test');
 		res.send();
+	});
+
+	app.post('/transactions/new', (req, res) => {
+		const sender = req.body.sender;
+		const recipient = req.body.recipient;
+		const amount = req.body.amount;
+
+		let blockchain = new Blockchain();
+		blockchain.new_transaction(sender, recipient, amount);
+	});
+
+	app.get('/mine', (req, res) => {
+
 	});
 
 	app.get('/peers', (req, res) => {
