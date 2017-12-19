@@ -1,4 +1,16 @@
 #!/usr/bin/env bash
+
+##init variables
+NODE1PEERSURL=$(curl -ss -X GET http://127.0.0.1:3001/peers)
+NODE1CHAIN=$(curl -ss -X GET http://127.0.0.1:3001/chain)
+NODE2CHAIN=$(curl -ss -X GET http://127.0.0.1:3002/chain)
+NODE4TRANSACTION=$(curl -ss -X POST -d '{
+ "sender": "d4ee26eee15148ee92c6cd394edd974e",
+ "recipient": "someone-other-address",
+ "amount": 5
+}' http://127.0.0.1:3004/transactions/new)
+NODE2MINE=$(curl -ss -X GET http://127.0.0.1:3002/mine)
+
 echo "Welcome to Group 9's Blockchain Assignment!"
 echo "Getting required files.."
 
@@ -20,16 +32,25 @@ fi
 docker-compose up -d
 
 echo "Done.."
-IP=$(curl -X GET http://127.0.0.1:3004/chain)
-
-echo "Starting test"
+echo
+echo "Node 1: Confirming peers:" 
+echo 
+echo "$NODE1PEERSURL"
+echo 
+echo "RUNNING TEST SCENARIO ON BLOCKCHAIN"
+echo
+echo "Starting with Genesis Block"
+echo
 echo "Blockchain:"
-echo "$IP" 
-
-IP2=$(curl -X POST '{
- "sender": "d4ee26eee15148ee92c6cd394edd974e",
- "recipient": "someone-other-address",
- "amount": 5
-}' http://127.0.0.1:3004/transactions/new)
-
-echo "$IP2"
+echo
+echo "$NODE1CHAIN" 
+echo
+echo "Node 4 making a new transaction calling: http://127.0.0.1:3004/transactions/new "
+echo
+echo "$NODE4TRANSACTION"
+echo
+printf "Node 2 mine\n\ncalling http://127.0.0.1:3002/mine\n"
+printf "MINING..\n"
+printf "$NODE2MINE"
+printf "\n Updated Blockchain: \n"
+printf "$NODE2CHAIN"
