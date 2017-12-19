@@ -60,12 +60,6 @@ module.exports = class Blockchain {
 		return proof;
 	}
 
-	pending_transactions () {
-		console.log(this,current_transactions)
-		return this.current_transactions;
-	}
-
-
 	valid_proof (last_proof, proof) {
 		var guess = '' + last_proof + proof;
 		var hashed_guess = sha256(guess);

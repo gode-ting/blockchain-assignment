@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-echo "Welcome to Group C's Blockchain Assignment!"
+echo "Welcome to Group 9's Blockchain Assignment!"
 echo "Getting required files.."
 
 wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/Dockerfile
@@ -16,7 +16,20 @@ if (($COUNT > 0)); then
     echo $CONTAINER_NAME' exists'
 fi
 
-docker-compose build
-docker-compose up
+#docker-compose build
+docker-compose up -d
 
 echo "Done.."
+IP=$(curl -X GET http://127.0.0.1:3004/chain)
+
+echo "Starting test"
+echo "Blockchain:"
+echo "$IP" 
+
+IP2=$(curl -X POST '{
+ "sender": "d4ee26eee15148ee92c6cd394edd974e",
+ "recipient": "someone-other-address",
+ "amount": 5
+}' http://127.0.0.1:3004/transactions/new)
+
+echo "$IP2"

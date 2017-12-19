@@ -26,7 +26,7 @@ services:
       - ./:/home/node/app
       - /home/node/app/node_modules
     ports:
-      - "3002:3001"
+      - "3002:3002"
     environment:
       - PEERS=ws://node1:6001
       - HTTP_HOST=0.0.0.0
@@ -48,7 +48,7 @@ services:
       - ./:/home/node/app
       - /home/node/app/node_modules
     ports:
-      - "3003:3001"
+      - "3003:3003"
     environment:
       - PEERS=ws://node1:6001,ws://node2:6001
       - HTTP_HOST=0.0.0.0
@@ -72,7 +72,7 @@ services:
       - ./:/home/node/app
       - /home/node/app/node_modules
     ports:
-      - "3004:3001"
+      - "3004:3004"
     environment:
       - PEERS=ws://node1:6001,ws://node2:6001,ws://node3:6001
       - HTTP_HOST=0.0.0.0
