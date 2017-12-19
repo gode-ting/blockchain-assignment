@@ -2,9 +2,9 @@
 echo "Welcome to Group C's Blockchain Assignment!"
 echo "Getting required files.."
 
-git clone https://github.com/gode-ting/blockchain-assignment.git
+wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/Dockerfile
 
-cd blockchain-assignment
+wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/docker-compose.yml
 
 echo "Done.."
 echo "Setting up nodes.."
