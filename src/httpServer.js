@@ -23,8 +23,20 @@ const initHttpServer = (port) => {
 		res.json({status: 'success', transaction: JSON.stringify(blockchain)});
 	});
 
+	var myBC = new Blockchain();
 	app.get('/mine', (req, res) => {
-
+		var last_block = myBC.last_block()
+		var last_proof = last_block.proof
+		var proof = myBC.proof_of_work(last_proof)
+		var previous_hash = myBC.hash_block(last_block)
+	
+		myBC.new_transaction("Mine reward", "Unknown worker", 1)
+	
+		myBC.new_block(proof, previous_hash)
+	
+		res.send('Block added!')
+		console.log("-------------------")
+		console.log(myBC.chain)
 	});
 
 	app.get('/peers', (req, res) => {
@@ -36,6 +48,16 @@ const initHttpServer = (port) => {
 		res.send(`Added ${req.body.peer} to peer list`);
 	});
 	app.listen((port), () => console.log(`Listening http on port:${port}`));
+
+	
+	app.get('/chain', function (req, res) {
+    	response = {
+        'chain': myBC.chain,
+        'length': myBC.chain.length
+    	}
+    	res.send(JSON.stringify(response))
+
+	})
 };
 
 module.exports = {

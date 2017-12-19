@@ -3,11 +3,11 @@ const sha256 = require('sha256');
 module.exports = class Blockchain {
 	constructor() {
 		this.chain = [{
-			'index': 0,
+			'index': 1,
 			'timestamp': new Date().toLocaleString,
 			'transactions': 'empty',
-			'proof': 'proof',
-			'previous_hash': 'Genesis'
+			'proof': '100',
+			'previous_hash': '1'
 		}];
 		this.current_transactions = [];
 	}
@@ -52,4 +52,9 @@ module.exports = class Blockchain {
 		var hashed_guess = sha256(guess);
 		return hashed_guess.substr(hashed_guess.length - 1) === '0';
 	}
+	hash_block(block) {
+        return sha256(JSON.stringify(block))
+	}
+	
+	
 };
