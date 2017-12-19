@@ -1,0 +1,91 @@
+version: '3'
+services:
+  node1:
+    container_name: node1
+    build: .
+    user: "node"
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+      - /home/node/app/node_modules
+    ports:
+      - "3001:3001"
+    environment:
+      - HTTP_HOST=0.0.0.0
+      - DEBUG=app*
+      - HTTP_PORT=3001
+    command: "npm start"
+    entrypoint: node index.js
+
+  node2:
+    container_name: node2
+    build: .
+    user: "node"
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+      - /home/node/app/node_modules
+    ports:
+      - "3002:3001"
+    environment:
+      - PEERS=ws://node1:6001
+      - HTTP_HOST=0.0.0.0
+      - DEBUG=app*
+      - HTTP_PORT=3002
+    links:
+      - node1
+    depends_on:
+      - node1
+    command: "npm start"
+    entrypoint: node index.js
+
+  node3:
+    container_name: node3
+    build: .
+    user: "node"
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+      - /home/node/app/node_modules
+    ports:
+      - "3003:3001"
+    environment:
+      - PEERS=ws://node1:6001,ws://node2:6001
+      - HTTP_HOST=0.0.0.0
+      - DEBUG=app*
+      - HTTP_PORT=3003
+    links:
+      - node1
+      - node2
+    depends_on:
+      - node1
+      - node2
+    command: "npm start"
+    entrypoint: node index.js 
+
+  node4:
+    container_name: node4
+    build: .
+    user: "node"
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+      - /home/node/app/node_modules
+    ports:
+      - "3004:3001"
+    environment:
+      - PEERS=ws://node1:6001,ws://node2:6001,ws://node3:6001
+      - HTTP_HOST=0.0.0.0
+      - DEBUG=app*
+      - HTTP_PORT=3004
+    links:
+      - node1
+      - node2
+      - node3
+    depends_on:
+      - node1
+      - node2
+      - node3
+    command: "npm start"
+    entrypoint: node index.js
+
