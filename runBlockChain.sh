@@ -1,14 +1,11 @@
 #!/usr/bin/env bash
 echo "Welcome to Group C's Blockchain Assignment!"
 echo "Getting required files.."
-if [ ! -f "/Dockerfile" ]
-then
-    wget -O /DockerFile https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/Dockerfile
-fi
-if [ ! -f "/docker-compose.yml" ]
-then
-    wget -O /docker-compose.yml https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/docker-compose.yml
-fi
+
+git clone https://github.com/gode-ting/blockchain-assignment.git
+
+cd blockchain-assignment
+
 echo "Done.."
 echo "Setting up nodes.."
 # Check if docker containers exists
