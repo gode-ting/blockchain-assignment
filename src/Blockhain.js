@@ -46,7 +46,7 @@ module.exports = class Blockchain {
 
 		return proof;
 	}
-
+	
 	valid_proof (last_proof, proof) {
 		var guess = '' + last_proof + proof;
 		var hashed_guess = sha256(guess);
@@ -55,6 +55,5 @@ module.exports = class Blockchain {
 	hash_block(block) {
         return sha256(JSON.stringify(block))
 	}
-	
 	
 };
