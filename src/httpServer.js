@@ -16,12 +16,19 @@ const initHttpServer = (port) => {
 	});
 
 	app.post('/transactions/new', (req, res) => {
-		myBC.new_transaction({
+		const index = myBC.new_transaction({
 			'sender' : req.body.sender,
 			'recipient' : req.body.recipient,
 			'amount' : req.body.amount
 		});
-		res.json({status: 'success', message: 'new pending transaction'});
+		res.json({status: 'success', message: `new pending transaction will be added to block id ${index}`});
+	});
+
+	app.get('/transactions/pending', function (req, res) {
+    	res.send({
+        	'pending_transactions': myBC.current_transactions,
+        	'length': myBC.current_transactions.length
+    	})
 	});
 	
 	app.get('/mine', (req, res) => {
@@ -33,7 +40,7 @@ const initHttpServer = (port) => {
 		const peerListeners = sockets.map(s => s._socket.remoteAddress + ':' + s._socket.remotePort);
 		res.send(peerListeners);
 	});
-	
+
 	app.post('/addPeer', (req, res) => {
 		peerServer.connectToPeers([req.body.peer]);
 		res.send(`Added ${req.body.peer} to peer list`);

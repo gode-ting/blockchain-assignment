@@ -44,6 +44,7 @@ module.exports = class Blockchain {
 
 	new_transaction (transaction) {
 		this.current_transactions.push(transaction);
+		return this.chain.length + 1;
 	}
 
 	last_block () {
@@ -59,11 +60,17 @@ module.exports = class Blockchain {
 		return proof;
 	}
 
+	pending_transactions () {
+		console.log(this,current_transactions)
+		return this.current_transactions;
+	}
+
 	valid_proof (last_proof, proof) {
 		var guess = '' + last_proof + proof;
 		var hashed_guess = sha256(guess);
 		return hashed_guess.substr(hashed_guess.length - 1) === '0';
 	}
+
 	hash_block(block) {
         return sha256(JSON.stringify(block))
 	}
