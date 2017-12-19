@@ -10,7 +10,7 @@ const MessageType = {
 let initP2PServer = (port) => {
 	let server = new WebSocket.Server({ port: port });
 	server.on('connection', ws => initConnection(ws));
-	console.log('listening websocket p2p port on: ' + port);
+	//console.log('listening websocket p2p port on: ' + port);
 
 };
 
@@ -18,7 +18,7 @@ let initConnection = (ws) => {
 	sockets.push(ws);
 	initMessageHandler(ws);
 	initErrorHandler(ws);
-	write(ws, { 'type': MessageType.QUERY_LATEST });
+	//write(ws, { 'type': MessageType.QUERY_LATEST });
 };
 
 let initMessageHandler = (ws) => {
@@ -52,7 +52,10 @@ let initErrorHandler = (ws) => {
 let connectToPeers = (newPeers) => {
 	newPeers.forEach((peer) => {
 		let ws = new WebSocket(peer);
-		ws.on('open', () => initConnection(ws));
+		ws.on('open', () => {
+			initConnection(ws);
+			console.log(`Connected to ${ws.url}`)
+		});
 		ws.on('error', () => {
 			console.log(`Connection failed on ${peer}`);
 		});
