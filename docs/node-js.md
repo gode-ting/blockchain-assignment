@@ -55,3 +55,25 @@ const express = require('express');
 // load local module
 const indexRouter = require('./routes/index.js');
 ```
+
+## module.exports
+
+[https://www.sitepoint.com/understanding-module-exports-exports-node-js/](https://www.sitepoint.com/understanding-module-exports-exports-node-js/).
+
+module.exports is the way to export content of one file to another. 
+
+**foo.js**
+
+```javascript
+let fooArray = [];
+module.exports = fooArray;
+```
+
+**bar.js**
+
+```javascript
+let fooArray = require('./foo');
+fooArray.push('bar');
+console.log(fooArray);
+// [ 'bar' ]
+```
