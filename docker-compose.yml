@@ -4,10 +4,10 @@ services:
     container_name: node1
     build: .
     user: "node"
-    working_dir: /home/node/app
+    working_dir: /
     volumes:
-      - ./:/home/node/app
-      - /home/node/app/node_modules
+      - ./:/
+      - /node_modules
     ports:
       - "3001:3001"
     environment:
@@ -21,10 +21,10 @@ services:
     container_name: node2
     build: .
     user: "node"
-    working_dir: /home/node/app
+    working_dir: /
     volumes:
-      - ./:/home/node/app
-      - /home/node/app/node_modules
+      - ./:/
+      - /node_modules
     ports:
       - "3002:3002"
     environment:
@@ -43,10 +43,10 @@ services:
     container_name: node3
     build: .
     user: "node"
-    working_dir: /home/node/app
+    working_dir: /
     volumes:
-      - ./:/home/node/app
-      - /home/node/app/node_modules
+      - ./:/
+      - /node_modules
     ports:
       - "3003:3003"
     environment:
@@ -67,10 +67,10 @@ services:
     container_name: node4
     build: .
     user: "node"
-    working_dir: /home/node/app
+    working_dir: /
     volumes:
-      - ./:/home/node/app
-      - /home/node/app/node_modules
+      - ./:/
+      - /node_modules
     ports:
       - "3004:3004"
     environment:
