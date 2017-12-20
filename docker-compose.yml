@@ -37,7 +37,7 @@ services:
     depends_on:
       - node1
     command: "npm start"
-    entrypoint: node index1.js
+    entrypoint: node index.js
 
   node3:
     container_name: node3

@@ -14,6 +14,12 @@ NODE2MINE=$(curl -ss -X GET http://127.0.0.1:3002/mine)
 echo "Welcome to Group 9's Blockchain Assignment!"
 echo "Getting required files.."
 
+wget https://github.com/gode-ting/blockchain-assignment/tree/master/src
+
+wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/package.json
+
+wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/index.js
+
 wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/Dockerfile
 
 wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/docker-compose.yml
