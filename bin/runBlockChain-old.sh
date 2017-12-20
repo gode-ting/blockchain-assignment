@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ##init variables
-NODE3GENESIS=$(curl -ss -X GET http://127.0.0.1:3003/createGenesis)
+NODE1PEERSURL=$(curl -ss -X GET http://127.0.0.1:3001/peers)
 NODE1CHAIN=$(curl -ss -X GET http://127.0.0.1:3001/chain)
 NODE2CHAIN=$(curl -ss -X GET http://127.0.0.1:3002/chain)
 NODE4TRANSACTION=$(curl -ss -X POST -d '{
@@ -9,24 +9,12 @@ NODE4TRANSACTION=$(curl -ss -X POST -d '{
  "recipient": "someone-other-address",
  "amount": 5
 }' http://127.0.0.1:3004/transactions/new)
-NODE2TRANSACTION=$(curl -ss -X POST -d '{
- "sender": "d4ee26eee15148ee92c6cd394edd974e",
- "recipient": "someone-other-address",
- "amount": 10
-}' http://127.0.0.1:3002/transactions/new)
-NODE3MINE=$(curl -ss -X GET http://127.0.0.1:3003/mine)
-NODE1MINE=$(curl -ss -X GET http://127.0.0.1:3001/mine)
-NODE4CHAIN=$(curl -ss -X GET http://127.0.0.1:3004/chain)
-NODE3CHAIN=$(curl -ss -X GET http://127.0.0.1:3003/chain)
-RESOLVE2=$(curl -ss -X GET http://127.0.0.1:3001/nodes/resolve)
-
+NODE2MINE=$(curl -ss -X GET http://127.0.0.1:3002/mine)
 
 echo "Welcome to Group 9's Blockchain Assignment!"
 echo "Getting required files.."
 
-mkdir "tempDocker"
-cd tempDocker
-mkdir src
+mkdir "src"
 
 if [ ! -f Blockchain.js ]; then
 	wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/src/Blockchain.js -P src
@@ -52,64 +40,39 @@ if [ ! -f docker-compose.yml ]; then
 	wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/docker-compose.yml
 fi
 
-echo "Building images..."
+echo "Done.."
+echo "Setting up nodes.."
+# Check if docker containers exists
+CONTAINER_NAME='node1'
+# Checking if docker container with $CONTAINER_NAME name exists.
+COUNT=$(docker ps -a | grep "$CONTAINER_NAME" | wc -l)
+if (($COUNT > 0)); then
+    echo $CONTAINER_NAME' exists'
+fi
 
 docker-compose build
-
-echo "Running containers..."
-
 docker-compose up -d
-sleep 30
-
+sleep 10
+echo "Done.."
+echo
+echo "Node 1: Confirming peers:" 
+echo 
+echo "$NODE1PEERSURL"
+echo 
 echo "RUNNING TEST SCENARIO ON BLOCKCHAIN"
 echo
-echo "NODE 3 - CREATING GENESIS BLOCK"
+echo "Starting with Genesis Block"
 echo
-echo "$NODE3GENESIS" 
-echo
-echo "NODE 1 - DISPLAYING CHAIN"
+echo "Blockchain:"
 echo
 echo "$NODE1CHAIN" 
 echo
-echo "NODE 2 - DISPLAYING CHAIN"
-echo
-echo "$NODE2CHAIN" 
-echo
-echo "NODE 4 - MAKING TRANSACTION"
-echo
-echo "$NODE4TRANSACTION" 
-echo
-echo "NODE 2 - MAKING TRANSACTION"
-echo "$NODE2TRANSACTION"
-echo
-echo "NODE 3 - MINING NEW BLOCK"
-echo
-echo "$NODE3MINE"
-echo
-echo "NODE 3 - DISPLAYING CHAIN"
-echo
-echo "$NODE3CHAIN"
-echo
-echo "NODE 4 - MAKING TRANSACTION"
+echo "Node 4 making a new transaction calling: http://127.0.0.1:3004/transactions/new "
 echo
 echo "$NODE4TRANSACTION"
 echo
-echo "NODE 1 - MINING NEW BLOCK"
-echo
-echo "$NODE3MINE"
-echo 
-echo "NODE 1 - DISPLAYING CHAIN"
-echo
-echo "$NODE1CHAIN" 
-
-
-cd ..
-rm -rf tempDocker
-
-
-
-
-
-
-
-
+printf "Node 2 mine\n\ncalling http://127.0.0.1:3002/mine\n"
+printf "MINING..\n"
+printf "$NODE2MINE"
+printf "\n Updated Blockchain: \n"
+printf "$NODE2CHAIN"
