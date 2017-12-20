@@ -14,7 +14,7 @@ NODE2MINE=$(curl -ss -X GET http://127.0.0.1:3002/mine)
 echo "Welcome to Group 9's Blockchain Assignment!"
 echo "Getting required files.."
 
-mkdir -p "$/src"
+mkdir ./$src
 
 wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/src/Blockhain.js -P /src
 
