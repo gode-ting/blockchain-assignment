@@ -44,7 +44,7 @@ fi
 
 docker-compose build
 docker-compose up -d
-
+sleep 10
 echo "Done.."
 echo
 echo "Node 1: Confirming peers:" 
