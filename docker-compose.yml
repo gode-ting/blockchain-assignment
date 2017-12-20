@@ -15,7 +15,7 @@ services:
       - DEBUG=app*
       - HTTP_PORT=3001
     command: "npm start"
-    entrypoint: node index.js
+    
 
   node2:
     container_name: node2
@@ -37,7 +37,7 @@ services:
     depends_on:
       - node1
     command: "npm start"
-    entrypoint: node index.js
+    
 
   node3:
     container_name: node3
@@ -61,7 +61,7 @@ services:
       - node1
       - node2
     command: "npm start"
-    entrypoint: node index.js 
+    
 
   node4:
     container_name: node4
@@ -87,5 +87,4 @@ services:
       - node2
       - node3
     command: "npm start"
-    entrypoint: node index.js
 
