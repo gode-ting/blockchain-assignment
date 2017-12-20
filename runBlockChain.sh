@@ -16,7 +16,7 @@ echo "Getting required files.."
 
 mkdir "src"
 
-wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/src/Blockhain.js -P src
+wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/src/Blockchain.js -P src
 
 wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/src/httpServer.js -P src
 
