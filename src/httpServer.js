@@ -8,6 +8,7 @@ const initHttpServer = (port) => {
 	app.use(bodyParser.json());
 
 	var myBC = new Blockchain();
+	console.log(myBC);
 
 	app.get('/', (req, res) => res.send('Hello World!'));
 
@@ -19,6 +20,9 @@ const initHttpServer = (port) => {
 
 	app.get('/mine', function (req, res) {
 		var last_block = myBC.last_block();
+		if (!last_block) {
+			return res.send('no blocks added');
+		}
 		var last_proof = last_block.proof;
 		var proof = myBC.proof_of_work(last_proof);
 		var previous_hash = myBC.hash_block(last_block);
