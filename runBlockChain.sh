@@ -43,7 +43,7 @@ if (($COUNT > 0)); then
 fi
 
 docker-compose build
-docker-compose up -d
+docker-compose up
 
 echo "Done.."
 echo
