@@ -16,21 +16,29 @@ echo "Getting required files.."
 
 mkdir "src"
 
-wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/src/Blockchain.js -P src
+if [ ! -f Blockchain.js ]; then
+	wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/src/Blockchain.js -P src
+fi
 
-wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/src/httpServer.js -P src
+if [ ! -f httpServer.js ]; then
+	wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/src/httpServer.js -P src
+fi
 
-wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/src/peerServer.js -P src
+if [ ! -f package.json ]; then
+	wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/package.json
+fi
 
-wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/src/sockets.js -P src
+if [ ! -f index.js ]; then
+	wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/index.js
+fi
 
-wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/package.json
+if [ ! -f Dockerfile ]; then
+	wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/Dockerfile
+fi
 
-wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/index.js
-
-wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/Dockerfile
-
-wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/docker-compose.yml
+if [ ! -f docker-compose.yml ]; then
+	wget https://raw.githubusercontent.com/gode-ting/blockchain-assignment/master/docker-compose.yml
+fi
 
 echo "Done.."
 echo "Setting up nodes.."
