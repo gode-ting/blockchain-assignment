@@ -24,3 +24,7 @@ Sådan er vores noder sat op:
 
 [https://github.com/vedmant/my-little-bitcoin](https://github.com/vedmant/my-little-bitcoin)
 
+## IMPORTANT: Fejl & mangler
+
+Vi har til sidst haft problemer med at synkronisere vores blockchain database over hele netværket. Vi har lavet et peer-to-peer netværk som virker når vi kører netværket lokalt (uden docker). Dvs at alle noder sybnkroniseres, således at de har den nyeste kopi at databasen. Men problemet opstår når vi forsøger at køre vores Blockchain via vores bash-script med docker-compose. Vi har desværre ikke haft tid til at finde fejlen, så vores release er ikke fuldent. Dette vil vi komme nærmere ind på til eksamen. 
+
