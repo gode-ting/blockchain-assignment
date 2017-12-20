@@ -21,6 +21,7 @@ const initHttpServer = (port) => {
 			'recipient' : req.body.recipient,
 			'amount' : req.body.amount
 		});
+		
 		res.json({status: 'success', message: `new pending transaction will be added to block id ${index}`});
 	});
 
