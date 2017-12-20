@@ -9,12 +9,12 @@
 	},
 	"scripts": {
 		"dev": "nodemon .",
-		"start": "node ./src/httpServer",
+		"start": "node index.js",
 		"test": "mocha",
-		"node-one": "HTTP_PORT=3001 P2P_PORT=6001 npm run dev",
-		"node-two": "HTTP_PORT=3002 P2P_PORT=6002 PEERS=ws://localhost:6001 npm run dev",
-		"node-three": "HTTP_PORT=3003 P2P_PORT=6003 PEERS=ws://localhost:6001,ws://localhost:6002 npm run dev",
-		"node-four": "HTTP_PORT=3004 P2P_PORT=6004 PEERS=ws://localhost:6001,ws://localhost:6002,ws://localhost:6003 npm run dev"
+		"nodeone": "HTTP_PORT=3001 P2P_PORT=6001 npm run dev",
+		"nodetwo": "HTTP_PORT=3002 P2P_PORT=6002 PEERS=ws://localhost:6001 npm run dev",
+		"nodethree": "HTTP_PORT=3003 P2P_PORT=6003 PEERS=ws://localhost:6001,ws://localhost:6002 npm run dev",
+		"nodefour": "HTTP_PORT=3004 P2P_PORT=6004 PEERS=ws://localhost:6001,ws://localhost:6002,ws://localhost:6003 npm run dev"
 	},
 	"repository": {
 		"type": "git",
