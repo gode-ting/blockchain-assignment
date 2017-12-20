@@ -7,11 +7,9 @@ WORKDIR /home/node/app
 ENV BUILD_LIST git
 
 RUN apt-get install $BUILD_LIST \
-    && git clone https://github.com/gode-ting/blockchain-assignment.git / \
+    && git clone https://github.com/gode-ting/blockchain-assignment.git /home/node/app \
     && npm install \
     && rm -rf /var/lib/apt/lists/*
-
-ADD blockchain-assignment /home/node/app
 
 COPY . /home/node/app
 
