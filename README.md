@@ -18,6 +18,10 @@ Sådan er vores noder sat op:
 
 3. Scriptet henter de nødvendige filer og vil efterfølgende køre et testcase.
 
+## Screen cast
+
+![](https://github.com/gode-ting/blockchain-assignment/blob/master/img/screencast.png)
+
 ## References
 
 [https://medium.com/@lhartikk/a-blockchain-in-200-lines-of-code-963cc1cc0e54](https://medium.com/@lhartikk/a-blockchain-in-200-lines-of-code-963cc1cc0e54)
