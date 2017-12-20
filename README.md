@@ -18,7 +18,7 @@ Sådan er vores noder sat op:
 
 3. Scriptet henter de nødvendige filer og vil efterfølgende køre et testcase.
 
-## Screen cast
+## Screen cast - Test Scenario
 
 ![](https://github.com/gode-ting/blockchain-assignment/blob/master/img/screencast.png)
 
