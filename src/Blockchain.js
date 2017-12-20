@@ -2,10 +2,10 @@ const sha256 = require('sha256');
 const aSyncRequest = require('request');
 
 module.exports = class Blockchain {
-	constructor() {
+	constructor(nodes) {
 		this.chain = [];
 		this.current_transactions = [];
-		this.nodes = [];
+		this.nodes = nodes;
 
 	}
 
@@ -23,12 +23,8 @@ module.exports = class Blockchain {
 		return block;
 	}
 
-	new_transaction (sender, recipient, amount) {
-		this.current_transactions.push({
-			sender,
-			recipient,
-			amount
-		});
+	new_transaction (transaction) {
+		this.current_transactions.push(transaction);
 	}
 
 	last_block () {
@@ -108,7 +104,7 @@ module.exports = class Blockchain {
 		this.nodes.forEach(function (element) {
 			console.log('Calling (async): ' + element);
 			aSyncRequest(element + '/chain', function (error, response, body) {
-				if (response.statusCode === 200) {
+				if (response && response.statusCode === 200) {
 					var blockchain = JSON.parse(body);
 					var length = blockchain.length;
 					var otherChain = blockchain.chain;

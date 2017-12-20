@@ -3,19 +3,26 @@ const bodyParser = require('body-parser');
 // const peerServer = require('./peerServer');
 const Blockchain = require('./Blockchain');
 
-const initHttpServer = (port) => {
+const initHttpServer = (port, nodes) => {
 	var app = express();
 	app.use(bodyParser.json());
 
-	var myBC = new Blockchain();
+	var myBC = new Blockchain(nodes);
 	console.log(myBC);
 
 	app.get('/', (req, res) => res.send('Hello World!'));
 
 	app.post('/transactions/new', function (req, res) {
-		myBC.new_transaction(req.body.sender, req.body.recipient, req.body.amount);
-		console.log(myBC.current_transactions);
-		res.send('transaction added!');
+
+		var transation = {
+			'sender': req.body.sender,
+			'recipient': req.body.recipient,
+			'amount': req.body.amount
+		}
+
+		myBC.new_transaction(transaction);
+
+		res.send({'New transaction added': transation}});
 	});
 
 	app.get('/mine', function (req, res) {
@@ -29,9 +36,9 @@ const initHttpServer = (port) => {
 
 		myBC.new_transaction('Mine reward', 'Unknown worker', 1);
 
-		myBC.new_block(proof, previous_hash);
+		var new_block = myBC.new_block(proof, previous_hash);
 
-		res.send('Block added!');
+		res.send({'New block mined' : new_block});
 	});
 
 	app.get('/createGenesis', function (req, res) {
@@ -45,7 +52,7 @@ const initHttpServer = (port) => {
 
 		myBC.chain.push(block);
 
-		res.send('Genesis added');
+		res.send({'Genesis block created' : block});
 
 	});
 
@@ -55,7 +62,7 @@ const initHttpServer = (port) => {
 			'length': myBC.chain.length,
 			'transactions': myBC.chain.current_transactions
 		};
-		res.send(JSON.stringify(response));
+		res.send(response);
 
 	});
 
@@ -70,7 +77,7 @@ const initHttpServer = (port) => {
 			'total_nodes': myBC.nodes.length
 		};
 
-		res.send(JSON.stringify(mes));
+		res.send(mes);
 	});
 
 	app.get('/nodes/resolve', function (req, res) {
