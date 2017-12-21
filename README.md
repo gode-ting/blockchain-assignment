@@ -18,9 +18,17 @@ Sådan er vores noder sat op:
 
 3. Scriptet henter de nødvendige filer og vil efterfølgende køre et testcase.
 
+## Screen cast - Test Scenario
+
+![](https://github.com/gode-ting/blockchain-assignment/blob/master/img/screencast.png)
+
 ## References
 
 [https://medium.com/@lhartikk/a-blockchain-in-200-lines-of-code-963cc1cc0e54](https://medium.com/@lhartikk/a-blockchain-in-200-lines-of-code-963cc1cc0e54)
 
 [https://github.com/vedmant/my-little-bitcoin](https://github.com/vedmant/my-little-bitcoin)
+
+## IMPORTANT: Fejl & mangler
+
+Vi har til sidst haft problemer med at synkronisere vores blockchain database over hele netværket. Vi har lavet et peer-to-peer netværk som virker når vi kører netværket lokalt (uden docker). Dvs at alle noder sybnkroniseres, således at de har den nyeste kopi at databasen. Men problemet opstår når vi forsøger at køre vores Blockchain via vores bash-script med docker-compose. Vi har desværre ikke haft tid til at finde fejlen, så vores release er ikke fuldent. Dette vil vi komme nærmere ind på til eksamen. 
 

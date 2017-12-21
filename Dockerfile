@@ -6,9 +6,11 @@ WORKDIR /home/node/app
 
 ENV BUILD_LIST git
 
+COPY . /home/node/app
+
 RUN apt-get install $BUILD_LIST \
     && npm install 
 
-COPY . /home/node/app
+
 
 EXPOSE 3001 3002 3003 3004

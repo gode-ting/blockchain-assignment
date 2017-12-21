@@ -11,6 +11,7 @@ services:
     ports:
       - "3001:3001"
     environment:
+      - PEERS=http://127.0.0.1:3002,http://127.0.0.1:3003
       - HTTP_HOST=0.0.0.0
       - DEBUG=app*
       - HTTP_PORT=3001
@@ -28,7 +29,7 @@ services:
     ports:
       - "3002:3002"
     environment:
-      - PEERS=ws://node1:6001
+      - PEERS=http://127.0.0.1:3001,http://127.0.0.1:3004
       - HTTP_HOST=0.0.0.0
       - DEBUG=app*
       - HTTP_PORT=3002
@@ -50,7 +51,7 @@ services:
     ports:
       - "3003:3003"
     environment:
-      - PEERS=ws://node1:6001,ws://node2:6001
+      - PEERS=http://127.0.0.1:3001,http://127.0.0.1:3004
       - HTTP_HOST=0.0.0.0
       - DEBUG=app*
       - HTTP_PORT=3003
@@ -74,7 +75,7 @@ services:
     ports:
       - "3004:3004"
     environment:
-      - PEERS=ws://node1:6001,ws://node2:6001,ws://node3:6001
+      - PEERS=http://127.0.0.1:3002,http://127.0.0.1:3003
       - HTTP_HOST=0.0.0.0
       - DEBUG=app*
       - HTTP_PORT=3004
